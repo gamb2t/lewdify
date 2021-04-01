@@ -1,5 +1,4 @@
 import discord, asyncio,requests
-import config
 from discord.ext import commands, tasks
 from discord.ext.commands import Bot
 
