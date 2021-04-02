@@ -46,7 +46,7 @@ async def erofeet(ctx):
 
 
 @bot.command()
-async def feet(ctx):
+async def feetgif(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/feetg")
     res = r.json()
@@ -55,13 +55,28 @@ async def feet(ctx):
             async with session.get(res['url']) as resp:
                 image = await resp.read()
         with io.BytesIO(image) as file:
-            await ctx.send(file=discord.File(file, f"feet.gif"))
+            await ctx.send(file=discord.File(file, f"feetg.gif"))
     except:
         em = discord.Embed()
         em.set_image(url=res['url'])
         await ctx.send(embed=em)
 
-
+@bot.command()
+async def feet(ctx):
+    await ctx.message.delete()
+    r = requests.get("https://nekos.life/api/v2/img/feet")
+    res = r.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(res['url']) as resp:
+                image = await resp.read()
+        with io.BytesIO(image) as file:
+            await ctx.send(file=discord.File(file, f"feet.png"))
+    except:
+        em = discord.Embed()
+        em.set_image(url=res['url'])
+        await ctx.send(embed=em)
+        
 @bot.command()
 async def hentai(ctx):
     await ctx.message.delete()
