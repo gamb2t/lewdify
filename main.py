@@ -180,7 +180,23 @@ async def lesbian(ctx):
 
 
 @bot.command()
-async def cumslut(ctx):
+async def cum(ctx):
+    await ctx.message.delete()
+    r = requests.get("https://nekos.life/api/v2/img/cum_jpg")
+    res = r.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(res['url']) as resp:
+                image = await resp.read()
+        with io.BytesIO(image) as file:
+            await ctx.send(file=discord.File(file, f"cum.png"))
+    except:
+        em = discord.Embed()
+        em.set_image(url=res['url'])
+        await ctx.send(embed=em)
+        
+bot.command()
+async def cumgif(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/cum")
     res = r.json()
@@ -189,7 +205,7 @@ async def cumslut(ctx):
             async with session.get(res['url']) as resp:
                 image = await resp.read()
         with io.BytesIO(image) as file:
-            await ctx.send(file=discord.File(file, f"cumslut.gif"))
+            await ctx.send(file=discord.File(file, f"cumgif.gif"))
     except:
         em = discord.Embed()
         em.set_image(url=res['url'])
@@ -229,20 +245,35 @@ async def waifu(ctx):
         em.set_image(url=res['url'])
         await ctx.send(embed=em)
 
-
 @bot.command()
-async def feed(ctx, user: discord.Member):
+async def solo(ctx):
     await ctx.message.delete()
-    r = requests.get("https://nekos.life/api/v2/img/feed")
+    r = requests.get("https://nekos.life/api/v2/img/solo")
     res = r.json()
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(res['url']) as resp:
                 image = await resp.read()
         with io.BytesIO(image) as file:
-            await ctx.send(user.mention, file=discord.File(file, f"feed.gif"))
+            await ctx.send(file=discord.File(file, f"solo.jpg"))
     except:
-        em = discord.Embed(description=user.mention)
+        em = discord.Embed()
+        em.set_image(url=res['url'])
+        await ctx.send(embed=em)
+        
+@bot.command()
+async def futa(ctx):
+    await ctx.message.delete()
+    r = requests.get("https://nekos.life/api/v2/img/futanari")
+    res = r.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(res['url']) as resp:
+                image = await resp.read()
+        with io.BytesIO(image) as file:
+            await ctx.send(file=discord.File(file, f"futa.jpg"))
+    except:
+        em = discord.Embed()
         em.set_image(url=res['url'])
         await ctx.send(embed=em)
 
